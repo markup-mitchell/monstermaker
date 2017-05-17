@@ -2,6 +2,7 @@
 const data = {
   heads: [
     {
+      name: 'robot',
       type: 'robot',
       colors: ['red', 'silver', 'black'],
       eyes: 2,
@@ -11,6 +12,7 @@ const data = {
       img: 'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png'
     },
     {
+      name: 'tiger',
       type: 'animal',
       colors: ['orange', 'black'],
       eyes: 2,
@@ -20,6 +22,7 @@ const data = {
       img: 'https://pbs.twimg.com/profile_images/601966649013501952/eHJIo7cP.png'
     },
     {
+      name: 'kitten',
       type: 'animal',
       colors: ['orange', 'black'],
       eyes: 2,
@@ -29,6 +32,7 @@ const data = {
       img: 'https://pbs.twimg.com/profile_images/601966649013501952/eHJIo7cP.png'
     },
     {
+      name: 'monster',
       type: 'animal',
       colors: ['orange', 'black'],
       eyes: 2,
@@ -63,26 +67,34 @@ const data = {
 
 const controller = {
   init: function() {
-    const headList = data.heads.map((obj) => obj.img);
-    console.log(headList);
     partsView.init();
-    partsView.render(headList);
   }
 }
   
 
+const globalTestArray = [
+  'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png',
+'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png',
+'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png','https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png'
+]
 
 const partsView = {
   init: function() {
-    this.cranium = document.getElementsByClassName('partRow')[0];
-    const torso = document.getElementsByClassName('torsoRow')[0];
+    this.headRow = document.getElementsByClassName('headRow')[0];
+    this.render(data.heads);
+
   },
-  render: function(headList) {
-    headList.forEach(function(url) {
-     let head = document.createElement('img');
-     head.src = url;
-     this.cranium.appendChild(head);
-    }, this);
+  render: function(array) {
+    array.map(function(obj) {
+      let newImage = document.createElement('img');
+      newImage.src = obj.img;
+      newImage.id = obj.name;
+      // newImage.height = 120px;
+      // newImage.width = 160px;
+      newImage.draggable = 'true';
+      newImage.onDragStart = 'drag(event)';
+    })
   }
 }
+
 controller.init();
