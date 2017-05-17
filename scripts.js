@@ -66,33 +66,29 @@ const data = {
 
 
 const controller = {
-  init: function() {
+  init() {
     partsView.init();
-  }
+  },
+
+  // drag
+
 }
   
-
-const globalTestArray = [
-  'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png',
-'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png',
-'https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png','https://cdn0.iconfinder.com/data/icons/black-logistics-icons/256/Robot_head.png'
-]
-
 const partsView = {
-  init: function() {
+  init() {
     this.headRow = document.getElementsByClassName('headRow')[0];
     this.render(data.heads);
-
   },
-  render: function(array) {
-    array.map(function(obj) {
+  render(array) {
+    array.forEach(function(obj) {
       let newImage = document.createElement('img');
       newImage.src = obj.img;
       newImage.id = obj.name;
       // newImage.height = 120px;
       // newImage.width = 160px;
       newImage.draggable = 'true';
-      newImage.onDragStart = 'drag(event)';
+      newImage.ondragstart = 'drag(event)';
+      partsView.headRow.appendChild(newImage);
     })
   }
 }
